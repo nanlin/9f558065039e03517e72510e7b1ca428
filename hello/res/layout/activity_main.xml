@@ -70,9 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="26dp"
-        android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
-    
+        android:layout_marginTop="26dp" />
+        
     <Button android:id="@+id/selectBtn"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:text="Select" android:layout_alignParentBottom="true"
