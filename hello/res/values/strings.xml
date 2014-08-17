@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">hello</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="advice_light">妳該多吃點</string>
+    <string name="advice_average">請繼續保持</string>
+    <string name="advice_heavy">該少吃點了</string>
+    <string name="title_activity_new">NewActivity</string>
+    <string name="title_activity_hey">Hey</string>
+
+</resources>
