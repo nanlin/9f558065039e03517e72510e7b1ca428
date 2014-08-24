@@ -1,6 +1,9 @@
 package com.example.hello;
 
 //import android.support.v7.app.ActionBarActivity;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
@@ -23,7 +26,23 @@ import android.view.View.OnClickListener;
 
 
 public class MainActivity extends Activity {
-
+	private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+                {
+                    Log.i("hello.main", "OpenCV loaded successfully");
+//                    mOpenCvCameraView.enableView();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
+            }
+        }
+    };
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +55,8 @@ public class MainActivity extends Activity {
         bt_bmi.setOnClickListener(calcBMI);
         bt_images.setOnClickListener(chooseImage);
         bt_multi_images.setOnClickListener(multichooseImage);
+        
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
     }
 
 
@@ -84,11 +105,11 @@ public class MainActivity extends Activity {
 //            // 切換到檔案選擇器 (它的處理結果, 會觸發 onActivityResult 事件)
 //            startActivityForResult(destIntent, 1);
             
-      	  Mat cokeBGR = Highgui.imread("/storage/sdcard1/DCIM/Camera/IMG_20140804_183140.jpg");
-          Bitmap bm = Bitmap.createBitmap(cokeBGR.cols(), cokeBGR.rows(), Bitmap.Config.ARGB_8888);
-          Utils.matToBitmap(cokeBGR, bm);
-          ImageView iv = (ImageView) findViewById(R.id.imageView1);
-          iv.setImageBitmap(bm);
+		  Mat cokeBGR = Highgui.imread("/mnt/sdcard/DCIM/Camera/C360_2012-11-07-13-48-23.jpg");
+		  Bitmap bm = Bitmap.createBitmap(cokeBGR.cols(), cokeBGR.rows(), Bitmap.Config.ARGB_8888);
+		  Utils.matToBitmap(cokeBGR, bm);
+		  ImageView iv = (ImageView) findViewById(R.id.imageView1);
+		  iv.setImageBitmap(bm);
 		}
 //    	
     };
