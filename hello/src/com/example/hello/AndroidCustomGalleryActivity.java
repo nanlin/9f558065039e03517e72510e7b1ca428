@@ -20,6 +20,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.opencv.core.Mat;
+import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+
+import android.graphics.Bitmap;
+
 public class AndroidCustomGalleryActivity extends Activity {
 	 private int count;
 	    private Bitmap[] thumbnails;
@@ -30,8 +40,10 @@ public class AndroidCustomGalleryActivity extends Activity {
 	    /** Called when the activity is first created. */
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
+//	    	System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.multichoose);
+	       
 //	    }
 //	 
 	        final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
@@ -71,7 +83,15 @@ public class AndroidCustomGalleryActivity extends Activity {
 	                {
 	                    if (thumbnailsselection[i]){
 	                        cnt++;
-	                        selectImages = selectImages + arrPath[i] + "|";
+	                        selectImages = selectImages + arrPath[i];
+	                        Log.d("SelectedImages", arrPath[i]);
+//	                        Mat cokeBGR = Highgui.imread(arrPath[i]);
+//	                        Bitmap bm = Bitmap.createBitmap(cokeBGR.cols(), cokeBGR.rows(), Bitmap.Config.ARGB_8888);
+//	                        Utils.matToBitmap(cokeBGR, bm);
+//	                        ImageView iv = (ImageView) findViewById(R.id.imageView1);
+//	                        iv.setImageBitmap(bm);
+//	                        Mat image = imread();
+//	                        arrPath[i],CvType.CV_8U
 	                    }
 	                }
 	                if (cnt == 0){

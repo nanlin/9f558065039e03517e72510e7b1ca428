@@ -1,8 +1,14 @@
 package com.example.hello;
 
 //import android.support.v7.app.ActionBarActivity;
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.highgui.Highgui;
+
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,22 +67,28 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Log.v("LogDemo","heyhey=============================================");
-			// 建立 "選擇檔案 Action" 的 Intent
-            Intent intent = new Intent();
-            // 過濾檔案格式
-            intent.setType( "image/*" );
+//			// 建立 "選擇檔案 Action" 的 Intent
+//            Intent intent = new Intent();
+//            // 過濾檔案格式
+//            intent.setType( "image/*" );
+//            
+//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//            
+//            intent.setAction(Intent.ACTION_GET_CONTENT);
+//            
+//           
+//            
+//            // 建立 "檔案選擇器" 的 Intent  (第二個參數: 選擇器的標題)
+//            Intent destIntent = Intent.createChooser( intent, "選擇檔案" );
+//            
+//            // 切換到檔案選擇器 (它的處理結果, 會觸發 onActivityResult 事件)
+//            startActivityForResult(destIntent, 1);
             
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            
-           
-            
-            // 建立 "檔案選擇器" 的 Intent  (第二個參數: 選擇器的標題)
-            Intent destIntent = Intent.createChooser( intent, "選擇檔案" );
-            
-            // 切換到檔案選擇器 (它的處理結果, 會觸發 onActivityResult 事件)
-            startActivityForResult(destIntent, 1);
+      	  Mat cokeBGR = Highgui.imread("/storage/sdcard1/DCIM/Camera/IMG_20140804_183140.jpg");
+          Bitmap bm = Bitmap.createBitmap(cokeBGR.cols(), cokeBGR.rows(), Bitmap.Config.ARGB_8888);
+          Utils.matToBitmap(cokeBGR, bm);
+          ImageView iv = (ImageView) findViewById(R.id.imageView1);
+          iv.setImageBitmap(bm);
 		}
 //    	
     };
@@ -111,7 +123,7 @@ public class MainActivity extends Activity {
 //			
 //			TextView res = (TextView)findViewById(R.id.textView2);
 //			res.setText(" BMI: "+bmi);
-			
+		
 			Intent qa_intent = new Intent();  
 			qa_intent.setClass(MainActivity.this, Hey.class);
 		    startActivity(qa_intent);    //觸發換頁
